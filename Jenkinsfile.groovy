@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent none
   options {
     buildDiscarder(logRotator(numToKeepStr: '10')) // Retain history on the last 10 builds
     ansiColor('xterm') // Enable colors in terminal
