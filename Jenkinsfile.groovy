@@ -9,6 +9,7 @@ pipeline {
   stages {  // Define the individual processes, or stages, of your CI pipeline
     stage('Build') { // Checkout (git clone ...) the projects repository
       agent {
+
         docker { image 'python:3' }
       }
       steps {
