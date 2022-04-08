@@ -12,21 +12,21 @@ here = path.abspath(path.dirname(__file__))
 
 
 setup(
-    name='authorizenet',
+    name='serrano_sdk',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='1.1.4',
+    version='0.1.0',
 
-    description='Authorize.Net Python SDK',
+    description='SERRANO Python SDK',
 
     # The project's main homepage.
-    url='https://github.com/AuthorizeNet/sdk-python',
+    url='https://gitlab.com/serranoproject/wp6/serrano-sdk',
 
     # Author details
-    author='Authorize.Net Developer',
-    author_email='developer@authorize.net',
+    author='Makis Karadimas',
+    author_email='makis.karadimas@netcompany-intrasoft.com',
 
     # Choose your license
     license='proprietary',
@@ -37,7 +37,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 4 - Beta',
+        'Development Status :: 3 - Alpha',
 
         # Indicate who your project is intended for
         'Intended Audience :: Developers',
@@ -48,7 +48,6 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4'
     ],
 
