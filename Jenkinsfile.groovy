@@ -6,16 +6,21 @@ pipeline {
     timestamps() // Append timestamps to each line
     timeout(time: 20, unit: 'MINUTES') // Set a timeout on the total execution time of the job
   }
-  stages {  // Define the individual processes, or stages, of your CI pipeline
-    stage('Build') { // Checkout (git clone ...) the projects repository
-      agent {
-
-        docker { image 'python:3' }
-      }
+  agent {
+    kubernetes {
+      cloud 'kubernetes'
+      defaultContainer 'jnlp'
+      yamlFile 'build.yaml'
+    }
+  }
+  stages {
+    stage('Install requirements') {
       steps {
-        sh """
-          pip install pylint
-          """
+        container('python') {
+          sh '/usr/local/bin/python -m pip install --upgrade pip'
+          sh 'pip install -r requirements.txt'
+          sh 'pip install --no-input cyclonedx-bom'
+        }
       }
     }
   }
