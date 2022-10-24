@@ -28,7 +28,7 @@ pipeline {
     stage('Unit tests') {
       steps {
         container('python') {
-          sh 'python -m unittest composeexample.utils'
+          sh 'python -m unittest discover'
         }
       }
     }
