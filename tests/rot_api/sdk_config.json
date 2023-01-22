@@ -1,0 +1,17 @@
+{
+  "rot": {
+    "api_client": {
+      "server_address": "rot.wp5.services.cloud.ict-serrano.eu",
+      "server_port": 443,
+      "username": "",
+      "password": "",
+      "client_uuid": ""
+    },
+    "databroker_interface": {
+      "address": "",
+      "username": "",
+      "password": "",
+      "virtual_host": ""
+    }
+  }
+}
