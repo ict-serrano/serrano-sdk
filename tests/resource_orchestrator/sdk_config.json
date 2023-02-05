@@ -1,0 +1,11 @@
+{
+  "resource_orchestrator": {
+    "api_client": {
+      "server_address": "85.120.206.26",
+      "server_port": 30100,
+      "username": "",
+      "password": "",
+      "client_uuid": ""
+    }
+  }
+}
