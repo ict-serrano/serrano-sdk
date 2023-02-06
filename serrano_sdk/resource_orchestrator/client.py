@@ -26,7 +26,7 @@ class ResourceOrchestrator:
 
                 self.__client_uuid = params["resource_orchestrator"]["api_client"]["client_uuid"]
 
-                self.__rest_url = "https://%s:%s" % (params["resource_orchestrator"]["api_client"]["server_address"],
+                self.__rest_url = "http://%s:%s" % (params["resource_orchestrator"]["api_client"]["server_address"],
                                                      params["resource_orchestrator"]["api_client"]["server_port"])
 
                 self.__http_auth = (params["resource_orchestrator"]["api_client"]["username"],
