@@ -1,8 +1,8 @@
 {
   "resource_orchestrator": {
     "api_client": {
-      "server_address": "85.120.206.26",
-      "server_port": 30100,
+      "server_address": "resource-orchestrator.services.cloud.ict-serrano.eu",
+      "server_port": 443,
       "username": "",
       "password": "",
       "client_uuid": ""
