@@ -89,28 +89,6 @@ class SecureStorage:
                 bucket_name=bucket_name, ex=e)
         return resp
 
-    def download_object(self, bucket_name, object_key):
-        """Download object from bucket
-
-        :param bucket_name: Bucket to download the object from
-        :param object_key: Key of object to be downloaded
-        :return: True if object downloaded, else False
-        """
-        file_name = object_key + "_downloaded"
-        try:
-            resp = self._client.download_file(bucket_name, object_key, file_name)
-            return True
-        except ClientError as e:
-            message = ("Unable to download object (bucket={bucket_name}). Client error: {ex}.").format(
-                bucket_name=bucket_name, ex=e.response['Error'])
-            logging.error(e)
-            return False
-        except Exception as e:
-            message = ("Unable to download object (bucket={bucket_name}). Exception: {ex}. ").format(
-                bucket_name=bucket_name, ex=e)
-            logging.error(e)
-            return False
-
     def delete_object(self, bucket_name, object_key):
         """Delete object from bucket
 
