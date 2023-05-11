@@ -6,8 +6,8 @@ class ResourceOrchestrator:
     """
     Instantiate a ResourceOrchestrator operation.
 
-    :param parameter: parameter.
-    :type parameter: int
+    :param config_path: Filesystem path where the configuration file is located (default: "~/.serrano/sdk_config.json")
+    :type config_path: string
     """
 
     def __init__(self, config_path):

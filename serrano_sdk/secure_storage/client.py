@@ -8,7 +8,7 @@ from botocore.exceptions import ClientError
 
 class SecureStorage:
 
-    def create_bucket(self, bucket_name, storage_policy_name="SERRANO-SDK"):
+    def create_bucket(self, bucket_name, storage_policy_name):
         """Create an S3 bucket
 
         :param bucket_name: Bucket to create

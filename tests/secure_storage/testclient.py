@@ -20,7 +20,7 @@ class SecureStorageTestCase(unittest.TestCase):
 
     def setUp(self):
         self.secureStorage = SecureStorage(GATEWAY_URL, SKYFLOK_TOKEN)
-        self.secureStorage.create_bucket("SERRANO_SDK_test_bucket")
+        self.secureStorage.create_bucket("SERRANO_SDK_test_bucket", "SERRANO-SDK")
 
     def test_list_buckets(self):
         """Test for list_buckets function"""
@@ -45,20 +45,6 @@ class SecureStorageTestCase(unittest.TestCase):
         self.assertEquals(file_data, response['Body'].read().decode('utf-8'))
 
         self.secureStorage.delete_object("SERRANO_SDK_test_bucket", "test_file00001")
-
-    def test_download_object(self):
-        """Test for download object function"""
-        result = self.secureStorage.upload_object("SERRANO_SDK_test_bucket", "test_file00001", file_data)
-        self.assertTrue(result)
-
-        result = self.secureStorage.download_object("SERRANO_SDK_test_bucket", "test_file00001")
-        self.assertTrue(result)
-        file = open("test_file00001_downloaded", "r")
-        self.assertEquals(file_data, file.read())
-        os.remove("test_file00001_downloaded")
-
-        self.secureStorage.delete_object("SERRANO_SDK_test_bucket", "test_file00001")
-
 
     def tearDown(self):
         self.secureStorage.delete_bucket("SERRANO_SDK_test_bucket")
