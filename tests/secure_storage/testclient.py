@@ -1,7 +1,7 @@
 import unittest, os
 from serrano_sdk.secure_storage.client import SecureStorage
 
-GATEWAY_URL = "https://on-premise-storage-gateway.services.cloud.ict-serrano.eu"
+GATEWAY_URL = "https://on-premise-storage-gateway.services.cloud.ict-serrano.eu/s3"
 SKYFLOK_TOKEN = "PKxZpXhEx5JyT8uRaH6BBtKfkbOY4nfwe3mPqe9lWZi9ufzUfKYNkSr9UPIwslsC"
 file_data = """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet vulputate augue. Phasellus\
  lobortis pharetra dignissim. Quisque feugiat, nulla id rutrum interdum, nunc tellus maximus mauris, at mollis velit\

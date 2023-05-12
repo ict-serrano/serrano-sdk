@@ -8,7 +8,7 @@ from botocore.exceptions import ClientError
 
 class SecureStorage:
 
-    def create_bucket(self, bucket_name, storage_policy_name):
+    def create_bucket(self, bucket_name, storage_policy_name=""):
         """Create an S3 bucket
 
         :param bucket_name: Bucket to create
@@ -16,8 +16,12 @@ class SecureStorage:
         :return: True if bucket created, else False
         """
         try:
-            resp = self._client.create_bucket(Bucket=bucket_name,
-                                              CreateBucketConfiguration={'LocationConstraint': storage_policy_name})
+            if storage_policy_name == "":
+                resp = self._client.create_bucket(Bucket=bucket_name)
+            else:
+                bucket_configuration = {'LocationConstraint': storage_policy_name}
+                resp = self._client.create_bucket(Bucket=bucket_name,
+                                                  CreateBucketConfiguration=bucket_configuration)
         except ClientError as e:
             logging.error(e)
             return False
@@ -120,7 +124,7 @@ class SecureStorage:
                  skyflok_token):
         self._client = boto3.client(
             's3',
-            endpoint_url="{gateway}/s3".format(gateway=gateway_url),
+            endpoint_url="{gateway}".format(gateway=gateway_url),
             region_name="local",
             config=Config(signature_version='s3v4'),
             aws_access_key_id=skyflok_token,
