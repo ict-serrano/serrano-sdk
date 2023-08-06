@@ -1,0 +1,11 @@
+{
+  "pmds": {
+    "api_client": {
+      "server_address": "pmds.services.cloud.ict-serrano.eu",
+      "server_port": 80,
+      "username": "",
+      "password": "",
+      "client_uuid": ""
+    }
+  }
+}

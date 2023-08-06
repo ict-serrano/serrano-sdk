@@ -39,28 +39,28 @@ class ROT:
         except KeyError as s:
             raise clientEvents.ConfigurationError("Invalid configuration - Missing configuration parameter %s" % s)
 
-    def is_ready(self):
-        response =self.session.get(self.__rest_url, verify=False)
-        return response
     def get_engines(self):
-        data = {}
         res = requests.get("%s/api/v1/rot/engines" % self.__rest_url, auth=self.__http_auth)
+        data = {'status_code': res.status_code}
         if res.status_code == 200:
-            data = json.loads(res.text)["engines"]
+            data = json.loads(res.text)
+            data['status_code'] = 200
         return data
 
     def get_engine(self, engine_uuid):
-        data = {}
         res = requests.get("%s/api/v1/rot/engine/%s" % (self.__rest_url, engine_uuid), auth=self.__http_auth)
+        data = {'status_code': res.status_code}
         if res.status_code == 200:
             data = json.loads(res.text)
+            data['status_code'] = 200
         return data
 
     def get_logs(self, execution_uuid):
-        data = {}
         res = requests.get("%s/api/v1/rot/logs/%s" % (self.__rest_url, execution_uuid), auth=self.__http_auth)
+        data = {'status_code': res.status_code}
         if res.status_code == 200:
-            data = json.loads(res.text)["log_details"]
+            data = json.loads(res.text)
+            data['status_code'] = 200
         return data
 
     def get_statistics(self, **kwargs):
@@ -68,33 +68,37 @@ class ROT:
         end = kwargs.get('end', None)
         return {}
 
-    def delete_execution(self, execution_uuid):
-        res = requests.delete("%s/api/v1/rot/execution/%s" % (self.__rest_url, execution_uuid), auth=self.__http_auth)
-        print(res.text)
+    # TODO def delete_execution(self, execution_uuid):
+    #     res = requests.delete("%s/api/v1/rot/execution/%s" % (self.__rest_url, execution_uuid), auth=self.__http_auth)
+    #     print(res.text)
 
     def post_execution(self, execution_plugin, parameters):
-        data = None
         if type(parameters) is not dict:
             parameters = json.loads(parameters)
         res = requests.post("%s/api/v1/rot/execution" % self.__rest_url,
                             auth=self.__http_auth,
                             json={"execution_plugin": execution_plugin, "parameters": parameters})
+        data = {'status_code': res.status_code}
         if res.status_code == 200 or res.status_code == 201:
             data = json.loads(res.text)
+            data['status_code'] = res.status_code
         return data
 
     def get_execution(self, execution_uuid):
         data = {}
         res = requests.get("%s/api/v1/rot/execution/%s" % (self.__rest_url, execution_uuid), auth=self.__http_auth)
+        data = {'status_code': res.status_code}
         if res.status_code == 200:
             data = json.loads(res.text)
+            data['status_code'] = 200
         return data
 
     def get_executions(self):
-        data = {}
         res = requests.get("%s/api/v1/rot/executions" % self.__rest_url, auth=self.__http_auth)
+        data = {'status_code': res.status_code}
         if res.status_code == 200:
-            data = json.loads(res.text)["executions"]
+            data = json.loads(res.text)
+            data['status_code'] = 200
         return data
 
     def close(self):

@@ -42,7 +42,7 @@ class SecureStorageTestCase(unittest.TestCase):
         self.assertTrue(result)
 
         response = self.secureStorage.get_object("SERRANO_SDK_test_bucket", "test_file00001")
-        self.assertEquals(file_data, response['Body'].read().decode('utf-8'))
+        self.assertEqual(file_data, response['Body'].read().decode('utf-8'))
 
         self.secureStorage.delete_object("SERRANO_SDK_test_bucket", "test_file00001")
 
