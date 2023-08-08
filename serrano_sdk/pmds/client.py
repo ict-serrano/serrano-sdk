@@ -76,5 +76,73 @@ class PMDS:
             data['status_code'] = 200
         return data
 
+
+
+    def pmds_service_query_deployments(self, cluster_uuid, namespace, **kwargs):
+        """
+            Provide historical telemetry data for the available Deployments within a K8s cluster.
+            
+            Required parameters:
+            - cluster_uuid (path parameter) => Determines the K8s cluster.
+            - namespace (query parameter) =>  Determines the target namespace
+
+            Parameters for requesting data for a specific timeframe, the same with the pmds_service_query_nodes()
+            
+            Filtering parameters:
+            - name (path parameter) => Limits the results only for the deployment with the provided name.
+            
+            Response format parameter, the same with the pmds_service_query_nodes()
+        """
+        valid_query_params = ["start", "stop", "name", "format"]
+
+        query_params = {k: v for (k, v) in kwargs.items() if k in valid_query_params}
+        query_params["namespace"] = namespace
+
+        res = requests.get("%s/api/v1/pmds/deployments/%s" % (self.__rest_url, cluster_uuid), params=query_params)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = 200
+        return data
+
+
+    def pmds_service_query_pods(self, cluster_uuid, namespace, **kwargs):
+        """
+            Provide historical telemetry data for the available Pods within a K8s cluster.
+            
+            Required parameters:
+            - cluster_uuid (path parameter) => Determines the K8s cluster.
+            - namespace (query parameter) =>  Determines the target namespace
+
+            Parameters for requesting data for a specific timeframe, the same with the pmds_service_query_nodes()
+            
+            Filtering parameters:
+            - name (path parameter) => Limits the results only for the pod with the provided name.
+            - node_name (path parameter) => Limits the results only for the pods that are running in the specified node name.  
+            
+            Response format parameter, the same with the pmds_service_query_nodes()
+        """
+        valid_query_params = ["start", "stop", "name", "node_name", "format"]
+
+        query_params = {k: v for (k, v) in kwargs.items() if k in valid_query_params}
+        query_params["namespace"] = namespace
+
+        res = requests.get("%s/api/v1/pmds/pods/%s" % (self.__rest_url, cluster_uuid), params=query_params)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = 200
+        return data
+    
+    def pmds_service_query_pvs(self, cluster_uuid, **kwargs):
+        valid_query_params = ["start", "stop", "name", "format"]
+        query_params = {k: v for (k, v) in kwargs.items() if k in valid_query_params}
+        res = requests.get("%s/api/v1/pmds/pvs/%s" % (self.__rest_url, cluster_uuid), params=query_params)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = 200
+        return data
+
     def close(self):
         self.session.close()
