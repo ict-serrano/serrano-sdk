@@ -40,7 +40,7 @@ class PMDSTestCase(unittest.TestCase):
         self.pmds.close()
 
     #################
-    #   EXAMPLES    #
+    #   EXAMPLES    #   note: param format = raw causing two tests to fail
     #################
 
     # query_nodes_examples
