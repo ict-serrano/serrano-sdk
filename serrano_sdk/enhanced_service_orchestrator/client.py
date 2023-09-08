@@ -42,5 +42,47 @@ class AIEnhancedServiceOrchestrator:
         response = self.session.get(self.__rest_url, verify=False)
         return response
 
+    def create_deployment_scenarios(self, object_params):
+        # Change path
+        res = requests.post("%s/CreateDeploymentScenarios" % self.__rest_url,
+                            auth=self.__http_auth,
+                            json=object_params
+                            )
+        data = {'status_code': res.status_code}
+        if res.status_code == 200 or res.status_code == 201:
+            data = json.loads(res.text)
+            data['status_code'] = res.status_code
+        return data
+
+    def application_deployment_through_ro(self, object_params):
+        # Change path
+        res = requests.post("%s/ApplicationDeploymentThroughRO" % self.__rest_url,
+                            auth=self.__http_auth,
+                            json= object_params
+                            )
+        data = {'status_code': res.status_code}
+        if res.status_code == 200 or res.status_code == 201:
+            data = json.loads(res.text)
+            data['status_code'] = res.status_code
+        return data
+
+    def application_management(self, appid, action, params):
+        res = requests.post("%s/ApplicationManagement" % self.__rest_url,
+                            auth=self.__http_auth,
+                            json={"appid": appid, "action": action, "params": params}
+                            )
+        data = {'status_code': res.status_code}
+        if res.status_code == 200 or res.status_code == 201:
+            data = json.loads(res.text)
+            data['status_code'] = res.status_code
+        return data
+
+    def testing_central_telemetry_handler(self):
+        res = requests.get("%s/TestingCentralTelemetryHanlder" % self.__rest_url, auth=self.__http_auth)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = res.status_code
+        return data
     def close(self):
         self.session.close()
