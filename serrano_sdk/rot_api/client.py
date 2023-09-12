@@ -39,6 +39,14 @@ class ROT:
         except KeyError as s:
             raise clientEvents.ConfigurationError("Invalid configuration - Missing configuration parameter %s" % s)
 
+    def get_history(self):
+        res = requests.get("%s/api/v1/rot/history" % self.__rest_url, auth=self.__http_auth)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = 200
+        return data
+    
     def get_engines(self):
         res = requests.get("%s/api/v1/rot/engines" % self.__rest_url, auth=self.__http_auth)
         data = {'status_code': res.status_code}
@@ -64,13 +72,19 @@ class ROT:
         return data
 
     def get_statistics(self, **kwargs):
-        start = kwargs.get('start', None)
-        end = kwargs.get('end', None)
-        return {}
+        valid_query_params = ["start", "end"]
+        query_params = {k: v for (k, v) in kwargs.items() if k in valid_query_params}
+        res = requests.get("%s/api/v1/rot/statistics" % (self.__rest_url), auth=self.__http_auth, params=query_params)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = 200
+        return data
 
-    # TODO def delete_execution(self, execution_uuid):
-    #     res = requests.delete("%s/api/v1/rot/execution/%s" % (self.__rest_url, execution_uuid), auth=self.__http_auth)
-    #     print(res.text)
+    def delete_execution(self, execution_uuid):
+        res = requests.delete("%s/api/v1/rot/execution/%s" % (self.__rest_url, execution_uuid), auth=self.__http_auth)
+        data = {'status_code': res.status_code}
+        return data
 
     def post_execution(self, execution_plugin, parameters):
         if type(parameters) is not dict:
@@ -101,6 +115,29 @@ class ROT:
             data['status_code'] = 200
         return data
 
+    def get_users(self):
+        res = requests.get("%s/api/v1/rot/users" % self.__rest_url, auth=self.__http_auth)
+        data = {'status_code': res.status_code}
+        if res.status_code == 200:
+            data = json.loads(res.text)
+            data['status_code'] = 200
+        return data
+    
+    def post_user(self, username, password):
+        res = requests.post("%s/api/v1/rot/user" % self.__rest_url,
+                            auth=self.__http_auth,
+                            json={"username": username, "password": password})
+        data = {'status_code': res.status_code}
+        if res.status_code == 200 or res.status_code == 201:
+            data = json.loads(res.text)
+            data['status_code'] = res.status_code
+        return data
+
+    def delete_user(self, client_uuid):
+        res = requests.delete("%s/api/v1/rot/user/%s" % (self.__rest_url, client_uuid), auth=self.__http_auth)
+        data = {'status_code': res.status_code}
+        return data
+    
     def close(self):
         self.session.close()
 

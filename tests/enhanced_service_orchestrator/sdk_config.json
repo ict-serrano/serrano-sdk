@@ -1,0 +1,10 @@
+{
+  "service_orchestrator": {
+    "api_client": {
+      "server_address": "ai-enhanced-service-orchestrator.services.cloud.ict-serrano.eu",
+      "server_port": 443,
+      "username": "user",
+      "password": "password"
+    }
+  }
+}
