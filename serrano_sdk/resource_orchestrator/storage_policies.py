@@ -15,9 +15,9 @@ def get_storage_policies(base_url):
 def create_storage_policy(base_url, storage_data):
     try:
         response = requests.post(base_url, json=storage_data)
-        if response.status_code == 200:
+        if response.status_code == 201:
             data = json.loads(response.text)
-            data['status_code'] = 200
+            data['status_code'] = 201
             return data
         else:
             raise Exception(f"Failed. Error code: {response.status_code}")

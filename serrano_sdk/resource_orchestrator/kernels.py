@@ -2,7 +2,7 @@ import requests
 
 def create_faas_kernel_execution(url, name, params):
     response = requests.post(url, json={"name": name, "params": params})
-    if response.status_code == 200:
+    if response.status_code == 201:
         return response.json()
     else:
         raise Exception(f"Failed. Error code: {response.status_code}")
@@ -16,7 +16,7 @@ def get_faas_kernel_execution(url, uuid):
 
 def create_kernel_execution(url, name, params):
     response = requests.post(url, json={"name": name, "params": params})
-    if response.status_code == 200:
+    if response.status_code == 201:
         return response.json()
     else:
         raise Exception(f"Failed. Error code: {response.status_code}")
